@@ -11,25 +11,16 @@ const db = mysql.createConnection({
   user: config.USER,
   password: config.PASSWORD,
   database: config.DB,
-  port: 3306
+  port: 3306,
+  insecureAuth: true
 })
 
 db.connect((err) => {
-  console.log("hit here")
   if (err) {
     throw err;
   }
   console.log("MySQL connected");
 });
-
-// app.get("/createdb", (req, res) => {
-//   let sql = `CREATE DATABASE ${config.DB}`;
-//   db.query(sql, (err, result) => {
-//     if (err) throw err;
-//     console.log(result);
-//     res.send("Database created...")
-//   })
-// })
 
 const PORT = process.env.PORT || 5000;
 
