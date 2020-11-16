@@ -1,0 +1,11 @@
+{
+  "name": "cpsc304olympics",
+  "version": "1.0.0",
+  "description": "Project for CPSC 304",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nick Siu, Kelvin Lo, Barry Sin",
+  "license": "MIT"
+}
