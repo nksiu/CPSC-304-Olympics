@@ -1,14 +1,23 @@
 import React, {Fragment, useState} from "react";
+import axios from "axios";
 import {
   Dialog, 
   DialogTitle,
   DialogContent,
   Button
 } from "@material-ui/core";
+import ResultTable from "../Table";
 
-const ResultDialog = () => {
+const ResultDialog = ({path, body, type}) => {
   const [open, setOpen] = useState(false);
+  const [result, setResult] = useState("");
+
   const handleClickOpen = () => {
+    if (type === "GET") {
+      axios.get(path).then(
+        res => setResult(res.data)
+      )
+    }
     setOpen(true)
   }
   const handleClose = () => {
@@ -19,12 +28,12 @@ const ResultDialog = () => {
     <Fragment>
       <Button variant="contained" color="primary" onClick={handleClickOpen}>Submit</Button>
 
-      <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth='md'>
+      <Dialog open={open} onClose={handleClose} fullWidth={true}>
         <DialogTitle>
           Results
         </DialogTitle>
         <DialogContent>
-          <p>hi</p>
+          <ResultTable result={result}/>
         </DialogContent>
       </Dialog>
     </Fragment>
