@@ -11,6 +11,14 @@ router.get("/", (req, res) => {
   })
 })
 
+router.get("/getCountry", (req, res) => {
+  sql.query("SELECT * FROM country", (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    res.json(result);
+  })
+})
+
 router.post('/insertSport', (req,res) => {
   //TODO replace example, 5000 with inputs
   var query = "INSERT INTO country(CountryName, NumMedals) VALUES('example', '5000')"

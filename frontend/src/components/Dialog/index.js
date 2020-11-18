@@ -26,7 +26,7 @@ const ResultDialog = ({path, body, type}) => {
 
   return (
     <Fragment>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>Submit</Button>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>View Table</Button>
 
       <Dialog open={open} onClose={handleClose} fullWidth={true}>
         <DialogTitle>
