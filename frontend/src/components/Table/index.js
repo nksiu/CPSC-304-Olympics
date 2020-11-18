@@ -7,6 +7,7 @@ import {
   TableCell,
   TableRow
 } from "@material-ui/core";
+import TableWrapper from "./TableWrapper";
 
 const ResultTable = ({result}) => {
   const [loaded, setLoaded] = useState(false);
@@ -23,26 +24,28 @@ const ResultTable = ({result}) => {
     <Fragment>
       {
         loaded ?
-          <Table>
-            <TableHead>
-              <TableRow>
+          <TableWrapper>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {
+                    headers.map((header) => (<TableCell className="table-header" key={uuidv4()}>{header}</TableCell>))
+                  }
+                </TableRow>
+              </TableHead>
+              <TableBody>
                 {
-                  headers.map((header) => (<TableCell key={uuidv4()}>{header}</TableCell>))
+                  result.map((row) => (
+                    <TableRow key={uuidv4()}>
+                      {
+                        headers.map((header) => (<TableCell key={uuidv4()}>{row[header]}</TableCell>))
+                      }
+                    </TableRow>
+                  ))
                 }
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {
-                result.map((row) => (
-                  <TableRow key={uuidv4()}>
-                    {
-                      headers.map((header) => (<TableCell key={uuidv4()}>{row[header]}</TableCell>))
-                    }
-                  </TableRow>
-                ))
-              }
-            </TableBody>
-          </Table>
+              </TableBody>
+            </Table>
+          </TableWrapper>
         :
         null
       }
