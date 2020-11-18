@@ -5,27 +5,50 @@ import {Typography, Button, TextField} from "@material-ui/core";
 import ResultDialog from "../Dialog";
 
 const FirstPage = () => {
-  const [updateForm, setUpdateForm] = useState({
+  const [insertForm, setInsertForm] = useState({
     country: "",
     medalsWon: null
   });
 
+  const [updateForm, setUpdateForm] = useState({
+    country: "",
+    medalsWon: null
+  }) 
+
   const handleCountryChange = (e) => {
+    setInsertForm({
+      ...insertForm,
+      country: e.target.value
+    })
+  }
+
+  const handleMedalChange = (e) => {
+    setInsertForm({
+      ...insertForm,
+      medalsWon: e.target.value
+    })
+  }
+
+  const handleCountryChangeUpdate = (e) => {
     setUpdateForm({
       ...updateForm,
       country: e.target.value
     })
   }
 
-  const handleMedalChange = (e) => {
+  const handleMedalChangeUpdate = (e) => {
     setUpdateForm({
       ...updateForm,
       medalsWon: e.target.value
     })
   }
 
+  const submitInsertQuery = () => {
+    axios.post("/api/olympics/insertSport", insertForm).then(res => res.data);
+  }
+
   const submitUpdateQuery = () => {
-    axios.post("/api/olympics/insertSport", updateForm).then(res => res.data);
+    axios.put("/api/olympics/updateCountry", updateForm).then(res => res.data);
   }
 
   return (
@@ -43,12 +66,18 @@ const FirstPage = () => {
           <div className="divForm">
             <TextField className="first-btn" variant="outlined" label="Country" onChange={handleCountryChange}/>
             <TextField variant="outlined" label="Medals Won" onChange={handleMedalChange}/>
-            <Button variant="contained" color="primary" onClick={submitUpdateQuery}>Submit</Button>
+            <Button variant="contained" color="primary" onClick={submitInsertQuery}>Submit</Button>
           </div>
         </div>
         <div className="queryColumn">
           <Typography variant="h5">Update</Typography>
-          <ResultDialog></ResultDialog>
+          <Typography color="textSecondary">Updates the number of medals won for a certain country</Typography>
+          <ResultDialog path="api/olympics/getCountry" type="GET"></ResultDialog>
+          <div className="divForm">
+            <TextField className="first-btn" variant="outlined" label="Country" onChange={handleCountryChangeUpdate}/>
+            <TextField variant="outlined" label="Medals Won" onChange={handleMedalChangeUpdate}/>
+            <Button variant="contained" color="primary" onClick={submitUpdateQuery}>Submit</Button>
+          </div>
         </div>
       </div>
     </PageWrapperSC>
