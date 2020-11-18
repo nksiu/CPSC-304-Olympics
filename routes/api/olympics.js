@@ -12,11 +12,12 @@ router.get("/", (req, res) => {
 })
 
 router.post('/insertSport', (req,res) => {
-  //TODO replace Gyna, 5000 with inputs
-  var query = "INSERT INTO country(CountryName, NumMedals) VALUES('Gyna', '5000')"
+  //TODO replace example, 5000 with inputs
+  var query = "INSERT INTO country(CountryName, NumMedals) VALUES('example', '5000')"
   sql.query(query, (err, result) => {
     if (err) throw err;
-    res.send('Added new wintersport');
+    console.log(result)
+    res.json(result);
   })
 })
 
@@ -25,7 +26,8 @@ router.delete('/deleteSport', (req,res) => {
     var query = "DELETE FROM wintersport WHERE name = 'example'"
     sql.query(query, (err, result) => {
       if (err) throw err;
-      res.send('Deleted mascot and olympic due to cascading delete');
+      console.log(result)
+      res.json(result);
     })
 })
 
@@ -34,7 +36,8 @@ router.put('/updateCountry', (req,res) => {
     var query = "UPDATE country SET NumMedals = '10000000' WHERE CountryName = 'example'"
     sql.query(query, (err, result) => {
       if (err) throw err;
-      res.send('Succesfully updated Country');
+      console.log(result)
+      res.json(result);
     })
 })
 
