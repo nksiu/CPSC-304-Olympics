@@ -5,21 +5,17 @@ const PageWrapperSC = styled.div`
     display: flex;
     justify-content: space-between;
   }
-
-  .container div {
-    border: 1px black solid;
-    padding: 10px;
-    height: 100vh;
-    background-color: white;
-  }
   
   .container h5 {
     text-align: center;
   }
 
   .queryColumn {
+    padding: 10px;
     width: 30%;
     text-align: center;
+    background-color: white;
+    height: 100vh;
   }
 
   .queryColumn p {
@@ -28,6 +24,16 @@ const PageWrapperSC = styled.div`
 
   .queryColumn button {
     margin-top: 15px;
+  }
+
+  .divForm {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .first-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
 `
