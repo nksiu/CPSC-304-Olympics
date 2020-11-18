@@ -5,6 +5,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/athlete", require("./routes/api/athlete"));
+app.use("/api/olympics", require("./routes/api/olympics"));
 
 const PORT = process.env.PORT || 5000;
 
