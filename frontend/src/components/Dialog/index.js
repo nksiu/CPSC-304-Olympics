@@ -15,7 +15,7 @@ const ResultDialog = ({path, body, type}) => {
   const handleClickOpen = () => {
     if (type === "GET") {
       axios.get(path).then(
-        res => setResult(res.data)
+        res => setResult(Object.values(res.data))
       )
     }
     setOpen(true)
