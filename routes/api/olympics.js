@@ -30,7 +30,7 @@ router.post('/insertSport', (req,res) => {
 
 router.delete('/deleteSport', (req,res) => {
     //TODO replace example with input
-    var query = "DELETE FROM wintersport WHERE name = 'example'"
+    var query = `DELETE FROM sport WHERE SportName = '${req.body.sport}';`
     sql.query(query, (err, result) => {
       if (err) throw err;
       console.log(result)
@@ -56,16 +56,61 @@ router.put('/updateCountry', (req,res) => {
 //   })
 // })
 
-// router.get('/aggregate', (req, res)  => {
-//   //TODO replace example with input
-//   var query = "SELECT FROM 
-//   sql.query(query, (err, result) => {
-//     if (err) throw err;
-//     res.send('Succesfully updated Country');
-//   })
-// })
+// Count the number of sports that each Athlete plays
+router.get('/groupBy', (req, res)  => {
+  var query = `SELECT Name, COUNT(SportName) 
+  FROM plays p, athlete a
+  WHERE a.AthleteID = p.AthleteID
+  GROUP BY Name;`
+  sql.query(query, (err, result) => {
+    console.log(result);
+    res.json(result);
+  })
+})
 
+// -- Find the sponsors that sponsor more than $2000 for every sponsorship
+router.get('/having', (req, res)  => {
+  var query = `SELECT sponsorName
+  FROM sponsoredby 
+  GROUP BY SponsorName
+  HAVING MIN(amountSponsored) > 2000`
+  sql.query(query, (err, result) => {
+    console.log(result);
+    res.json(result);
+  })
+})
 
+// -- For each olympic games with more than 2 events,  find the number of <Type> events
+router.get('/nestedAggregation', (req, res)  => {
+  var query = `SELECT Year, Count(e.Type) as numSportEvents
+  FROM hosts_event e
+  WHERE e.Type = '${req.body.type}'
+  GROUP BY e.Year
+  HAVING 2 < (SELECT COUNT(*)
+        FROM hosts_event e2
+        WHERE e.Year = e2.Year);`
+  sql.query(query, (err, result) => {
+    console.log(result);
+    res.json(result);
+  })
+})
 
+// -- Find the athlete (Names) that receive more than <Amount> from ALL of their sponsor
+router.get('/division', (req, res)  => {
+  var query = `SELECT a.Name 
+  FROM athlete a
+  WHERE NOT EXISTS(SELECT sb1.SponsorName
+            FROM sponsoredby sb1
+            WHERE a.AthleteID = sb1.AthleteID AND
+                    NOT EXISTS(
+                    SELECT sb2.SponsorName
+                    FROM sponsoredby sb2
+                    WHERE sb1.SponsorName = sb2.SponsorName AND a.AthleteID = sb2.AthleteID AND sb2.amountSponsored > '${req.body.amount}')
+                    );`
+  sql.query(query, (err, result) => {
+    console.log(result);
+    res.json(result);
+  })
+})
 
 module.exports = router;
