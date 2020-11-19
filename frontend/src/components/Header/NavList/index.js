@@ -47,6 +47,12 @@ const NavList = () => {
               <ListItemText>Second Page</ListItemText>
             </ListItem>
           </Link>
+          <Divider />
+          <Link to="/third">
+            <ListItem button>
+              <ListItemText>Third Page</ListItemText>
+            </ListItem>
+          </Link>
         </List>
       </Popover>
     </div>

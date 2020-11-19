@@ -4,8 +4,9 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 
 // Components
 import Header from "./components/Header";
-import FirstPage from "./components/FirstPage"
-import SecondPage from "./components/SecondPage"
+import FirstPage from "./components/FirstPage";
+import SecondPage from "./components/SecondPage";
+import ThirdPage from "./components/ThirdPage";
 
 // Styling
 import {createGlobalStyle} from "styled-components";
@@ -29,6 +30,7 @@ class App extends Component {
           <Header />
           <Route exact path="/" render={() => <FirstPage />} />
           <Route exact path="/second" render={() => <SecondPage />} />
+          <Route exact path="/third" render={() => <ThirdPage />} />
         </Router>
       </div>
     );

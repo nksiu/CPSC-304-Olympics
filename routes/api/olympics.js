@@ -103,16 +103,32 @@ router.get('/having', (req, res)  => {
   })
 })
 
+router.get("/getHostEvent", (req, res) => {
+  sql.query("SELECT * FROM hosts_event", (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    res.json(result);
+  })
+})
+
 // -- For each olympic games with more than 2 events,  find the number of <Type> events
 router.get('/nestedAggregation', (req, res)  => {
-  var query = `SELECT Year, Count(e.Type) as numSportEvents
+  var query = `SELECT Year, Count(e.Type) as numEvents
   FROM hosts_event e
-  WHERE e.Type = '${req.body.type}'
+  WHERE e.Type = '${req.query.type}'
   GROUP BY e.Year
   HAVING 2 < (SELECT COUNT(*)
         FROM hosts_event e2
         WHERE e.Year = e2.Year);`
   sql.query(query, (err, result) => {
+    console.log(result);
+    res.json(result);
+  })
+})
+
+router.get("/sponsoredBy", (req, res) => {
+  sql.query("SELECT Name, SponsorName, amountSponsored FROM sponsoredby sb, athlete a WHERE sb.AthleteID = a.AthleteID", (err, result) => {
+    if (err) throw err;
     console.log(result);
     res.json(result);
   })
@@ -128,7 +144,7 @@ router.get('/division', (req, res)  => {
                     NOT EXISTS(
                     SELECT sb2.SponsorName
                     FROM sponsoredby sb2
-                    WHERE sb1.SponsorName = sb2.SponsorName AND a.AthleteID = sb2.AthleteID AND sb2.amountSponsored > '${req.body.amount}')
+                    WHERE sb1.SponsorName = sb2.SponsorName AND a.AthleteID = sb2.AthleteID AND sb2.amountSponsored > '${req.query.amount}')
                     );`
   sql.query(query, (err, result) => {
     console.log(result);

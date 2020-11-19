@@ -35,24 +35,14 @@ const SecondPage = () => {
           </div>
         </div>
         <div className="queryColumn">
-          <Typography variant="h5">Insert</Typography>
-          <Typography color="textSecondary">Insert a country and how many medals they have won</Typography>
-          <ResultDialog path="api/olympics/getCountry" type="GET"></ResultDialog>
-          {/* <div className="divForm">
-            <TextField className="first-btn" variant="outlined" label="Country" onChange={handleCountryChange}/>
-            <TextField variant="outlined" label="Medals Won" onChange={handleMedalChange}/>
-            <Button variant="contained" color="primary" onClick={submitInsertQuery}>Submit</Button>
-          </div> */}
+          <Typography variant="h5">Group By</Typography>
+          <Typography color="textSecondary">Count the number of sports that each Athlete plays</Typography>
+          <ResultDialog path="api/olympics/groupBy" type="GET"></ResultDialog>
         </div>
         <div className="queryColumn">
-          <Typography variant="h5">Update</Typography>
-          <Typography color="textSecondary">Updates the number of medals won for a certain country</Typography>
-          <ResultDialog path="api/olympics/getCountry" type="GET"></ResultDialog>
-          {/* <div className="divForm">
-            <TextField className="first-btn" variant="outlined" label="Country" onChange={handleCountryChangeUpdate}/>
-            <TextField variant="outlined" label="Medals Won" onChange={handleMedalChangeUpdate}/>
-            <Button variant="contained" color="primary" onClick={submitUpdateQuery}>Submit</Button>
-          </div> */}
+          <Typography variant="h5">Having</Typography>
+          <Typography color="textSecondary">Find the sponsors that sponsor more than $2000 for every sponsorship</Typography>
+          <ResultDialog path="api/olympics/having" type="GET"></ResultDialog>
         </div>
       </div>
     </PageWrapperSC>
