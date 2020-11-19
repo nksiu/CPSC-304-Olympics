@@ -136,16 +136,16 @@ router.get("/sponsoredBy", (req, res) => {
 
 // -- Find the athlete (Names) that receive more than <Amount> from ALL of their sponsor
 router.get('/division', (req, res)  => {
-  var query = `SELECT a.Name 
-  FROM athlete a
-  WHERE NOT EXISTS(SELECT sb1.SponsorName
+  var query = `SELECT DISTINCT a.Name 
+  FROM athlete a, sponsoredby sb
+  WHERE a.AthleteID = sb.AthleteID AND NOT EXISTS(SELECT sb1.SponsorName
             FROM sponsoredby sb1
             WHERE a.AthleteID = sb1.AthleteID AND
                     NOT EXISTS(
                     SELECT sb2.SponsorName
                     FROM sponsoredby sb2
                     WHERE sb1.SponsorName = sb2.SponsorName AND a.AthleteID = sb2.AthleteID AND sb2.amountSponsored > '${req.query.amount}')
-                    );`
+                    )`
   sql.query(query, (err, result) => {
     console.log(result);
     res.json(result);
