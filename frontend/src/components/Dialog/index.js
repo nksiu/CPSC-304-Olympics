@@ -4,7 +4,8 @@ import {
   Dialog, 
   DialogTitle,
   DialogContent,
-  Button
+  Button,
+  Divider
 } from "@material-ui/core";
 import ResultTable from "../Table";
 
@@ -32,6 +33,7 @@ const ResultDialog = ({path, body, type}) => {
         <DialogTitle>
           Results
         </DialogTitle>
+        <Divider />
         <DialogContent>
           <ResultTable result={result}/>
         </DialogContent>

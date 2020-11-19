@@ -20,8 +20,7 @@ router.get("/getCountry", (req, res) => {
 })
 
 router.post('/insertSport', (req,res) => {
-  //TODO replace example, 5000 with inputs
-  var query = "INSERT INTO country(CountryName, NumMedals) VALUES('example', '5000')"
+  var query = `INSERT INTO country(CountryName, NumMedals) VALUES('${req.body.country}', '${req.body.medalsWon}')`
   sql.query(query, (err, result) => {
     if (err) throw err;
     console.log(result)
@@ -40,8 +39,7 @@ router.delete('/deleteSport', (req,res) => {
 })
 
 router.put('/updateCountry', (req,res) => {
-    //TODO replace example with input
-    var query = "UPDATE country SET NumMedals = '10000000' WHERE CountryName = 'example'"
+    var query = `UPDATE country SET NumMedals = '${req.body.medalsWon}' WHERE CountryName = '${req.body.country}'`
     sql.query(query, (err, result) => {
       if (err) throw err;
       console.log(result)
