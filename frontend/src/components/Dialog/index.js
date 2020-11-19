@@ -14,7 +14,14 @@ const ResultDialog = ({path, body, type}) => {
   const [result, setResult] = useState("");
 
   const handleClickOpen = () => {
-    if (type === "GET") {
+    if (type === "GET" && body) {
+      axios.get(path,
+      {
+        params: body
+      })
+      .then(res => setResult(Object.values(res.data)))
+    }
+    else if (type === "GET") {
       axios.get(path).then(
         res => setResult(Object.values(res.data))
       )

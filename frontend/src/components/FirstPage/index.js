@@ -13,7 +13,15 @@ const FirstPage = () => {
   const [updateForm, setUpdateForm] = useState({
     country: "",
     medalsWon: null
-  }) 
+  })
+
+  const [yearForm, setYearForm] = useState({
+    year: null
+  })
+
+  const handleYearChange = (e) => {
+    setYearForm({year: e.target.value})
+  }
 
   const handleCountryChange = (e) => {
     setInsertForm({
@@ -56,8 +64,11 @@ const FirstPage = () => {
       <div className="container">
         <div className="queryColumn">
           <Typography variant="h5">Selection</Typography>
-          <Typography color="textSecondary">Selects the Olympics Games that were held after 2012</Typography>
-          <ResultDialog path="api/olympics" type="GET"></ResultDialog>
+          <Typography color="textSecondary">Selects the Olympics Games that were held after a specified year</Typography>
+          <div className="divForm">
+            <TextField className="first-btn" variant="outlined" label="Year" onChange={handleYearChange}/>
+          </div>
+          <ResultDialog path="api/olympics/" type="GET" body={yearForm}></ResultDialog>
         </div>
         <div className="queryColumn">
           <Typography variant="h5">Insert</Typography>
