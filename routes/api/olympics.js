@@ -36,9 +36,24 @@ router.post('/insertSport', (req,res) => {
   })
 })
 
+router.get("/getSport", (req, res) => {
+  sql.query("SELECT * FROM sport", (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    res.json(result);
+  })
+})
+
+router.get("/getPlays", (req, res) => {
+  sql.query("SELECT * FROM plays", (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    res.json(result);
+  })
+})
+
 router.delete('/deleteSport', (req,res) => {
-    //TODO replace example with input
-    var query = `DELETE FROM sport WHERE SportName = '${req.body.sport}';`
+    var query = `DELETE FROM sport WHERE SportName = '${req.body.sportName}';`
     sql.query(query, (err, result) => {
       if (err) throw err;
       console.log(result)
