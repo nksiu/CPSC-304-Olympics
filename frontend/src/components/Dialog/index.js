@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import ResultTable from "../Table";
 
-const ResultDialog = ({path, body, type}) => {
+const ResultDialog = ({path, body, type, btnLabel}) => {
   const [open, setOpen] = useState(false);
   const [result, setResult] = useState("");
 
@@ -34,7 +34,7 @@ const ResultDialog = ({path, body, type}) => {
 
   return (
     <Fragment>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>View Table</Button>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>{btnLabel ? btnLabel : "View Table"}</Button>
 
       <Dialog open={open} onClose={handleClose} fullWidth={true}>
         <DialogTitle>

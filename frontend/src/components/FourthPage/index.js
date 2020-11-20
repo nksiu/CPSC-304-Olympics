@@ -18,8 +18,8 @@ const FourthPage = () => {
         <div className="queryColumn">
             <Typography variant="h5">Join</Typography>
             <Typography color="textSecondary">Gets the name of the athlete that was sponsored by more than a specified amount</Typography>
-            <ResultDialog path="api/olympics/sponsoredBy" type="GET"></ResultDialog>
-            <ResultDialog path="api/olympics/getAthlete" type="GET"></ResultDialog>
+            <ResultDialog path="api/olympics/sponsoredBy" type="GET" btnLabel="SponsoredBy Table"></ResultDialog>
+            <ResultDialog path="api/olympics/getAthlete" type="GET" btnLabel="Athlete Table"></ResultDialog>
             <div className="divForm">
               <TextField className="first-btn" variant="outlined" label="Amount" onChange={handleAmountChange}/>
             </div>
