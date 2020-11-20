@@ -1,10 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const sql = require("../../dbconfig/db");
+const fs = require('fs');
+const path = require('path');
 
 // @route GET api/olympics
 router.get("/", (req, res) => {
   sql.query(`SELECT * FROM olympics WHERE olympics.year > ${req.query.year}`, (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    res.json(result);
+  })
+})
+
+router.get("/reset", (req, res) => {
+  const reset = fs.readFileSync(path.join(__dirname, '../reset.sql'), 'utf8').toString();
+  sql.query(reset, (err, result) => {
     if (err) throw err;
     console.log(result);
     res.json(result);
@@ -93,10 +104,10 @@ router.get('/groupBy', (req, res)  => {
 
 // -- Find the sponsors that sponsor more than $2000 for every sponsorship
 router.get('/having', (req, res)  => {
-  var query = `SELECT sponsorName
+  var query = `SELECT sponsorName, SUM(amountSponsored) as totalSponsored
   FROM sponsoredby 
   GROUP BY SponsorName
-  HAVING MIN(amountSponsored) > 2000`
+  HAVING SUM(amountSponsored) > 2000`
   sql.query(query, (err, result) => {
     console.log(result);
     res.json(result);

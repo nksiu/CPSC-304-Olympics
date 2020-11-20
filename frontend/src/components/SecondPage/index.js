@@ -41,7 +41,7 @@ const SecondPage = () => {
         </div>
         <div className="queryColumn">
           <Typography variant="h5">Having</Typography>
-          <Typography color="textSecondary">Find the sponsors that sponsor more than $2000 for every sponsorship</Typography>
+          <Typography color="textSecondary">Find the sponsors that sponsor more than a total of $2000</Typography>
           <ResultDialog path="api/olympics/having" type="GET"></ResultDialog>
         </div>
       </div>
