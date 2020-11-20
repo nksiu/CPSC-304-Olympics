@@ -53,6 +53,11 @@ const NavList = () => {
               <ListItemText>Third Page</ListItemText>
             </ListItem>
           </Link>
+          <Link to="/fourth">
+            <ListItem button>
+              <ListItemText>Fourth Page</ListItemText>
+            </ListItem>
+          </Link>
         </List>
       </Popover>
     </div>

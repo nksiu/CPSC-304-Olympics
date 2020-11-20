@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import FirstPage from "./components/FirstPage";
 import SecondPage from "./components/SecondPage";
 import ThirdPage from "./components/ThirdPage";
+import FourthPage from "./components/FourthPage";
 
 // Styling
 import {createGlobalStyle} from "styled-components";
@@ -31,6 +32,7 @@ class App extends Component {
           <Route exact path="/" render={() => <FirstPage />} />
           <Route exact path="/second" render={() => <SecondPage />} />
           <Route exact path="/third" render={() => <ThirdPage />} />
+          <Route exact path="/fourth" render={() => <FourthPage />} />
         </Router>
       </div>
     );

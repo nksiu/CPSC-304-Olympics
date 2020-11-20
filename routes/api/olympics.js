@@ -152,4 +152,28 @@ router.get('/division', (req, res)  => {
   })
 })
 
+router.get('/projection', (req, res) => {
+  var query = `SELECT a.AthleteID, Name, SportName, DateTime, EventName, Year FROM competes_plays cp, athlete a WHERE cp.AthleteID = a.AthleteID`;
+  sql.query(query, (err, result) => {
+    console.log(result);
+    res.json(result);
+  })
+})
+
+router.get("/getAthlete", (req, res) => {
+  sql.query("SELECT * FROM athlete", (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    res.json(result);
+  })
+})
+
+router.get('/join', (req, res) => {
+  var query = `SELECT DISTINCT Name as AthleteName FROM sponsoredby sb, athlete a WHERE sb.AthleteID = a.AthleteID AND amountSponsored > '${req.query.amount}'`;
+  sql.query(query, (err, result) => {
+    console.log(result);
+    res.json(result);
+  })
+})
+
 module.exports = router;
