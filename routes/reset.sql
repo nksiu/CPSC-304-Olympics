@@ -1,5 +1,5 @@
 SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE `athlete`, `coach`, `coach_years`, `coaches`, `competes_plays`, `country`, `hosts_event`, `mascot_represents`, `olympics`, `participate`, `plays`, `represents_athlete`, `sponsor`, `sponsoredby`, `sport`, `summersport`, `wintersport`;
+DROP TABLE IF EXISTS `athlete`, `coach`, `coach_years`, `coaches`, `competes_plays`, `country`, `hosts_event`, `mascot_represents`, `olympics`, `participate`, `plays`, `represents_athlete`, `sponsor`, `sponsoredby`, `sport`, `summersport`, `wintersport`;
 SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE olympics(
 	Year		INTEGER PRIMARY KEY,
@@ -78,7 +78,7 @@ CREATE TABLE competes_plays(
 	FOREIGN KEY(AthleteID) REFERENCES athlete(AthleteID),
 	FOREIGN KEY(Year, EventName, DateTime) REFERENCES hosts_event(Year, Name, DateTime) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY(YEAR) REFERENCES olympics(YEAR),
-    FOREIGN KEY(SportName) REFERENCES sport(SportName));
+    FOREIGN KEY(SportName) REFERENCES sport(SportName) ON DELETE CASCADE);
     
 CREATE TABLE coach_years(
 	YearsCoached	INTEGER PRIMARY KEY,
